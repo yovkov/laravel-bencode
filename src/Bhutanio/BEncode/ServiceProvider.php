@@ -19,7 +19,6 @@ class ServiceProvider extends IlluminateServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('bhutanio/laravel-bencode');
 	}
 
 	/**
@@ -29,10 +28,11 @@ class ServiceProvider extends IlluminateServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['bencode'] = $this->app->share(function($app)
-			{
-				return new BEncode;
-			});
+
+			$this->app->bind('bencode',function($app, $params){
+
+	      return new BEncode;
+	    });
 	}
 
 	/**
@@ -42,7 +42,7 @@ class ServiceProvider extends IlluminateServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('bencode');
+		return [];
 	}
 
 }
